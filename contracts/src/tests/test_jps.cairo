@@ -610,21 +610,3 @@ fn build_map(width: u64, height: u64, tiles: Array<felt252>) -> Map {
     };
     MapTrait::new(height, width, map_tiles.span())
 }
-
-fn print(width: u64, span: Span<(u64, u64)>) {
-    let mut i = 0;
-    print!("PATH: {{ len: {}, values: [ ", span.len());
-    loop {
-        if span.len() == i {
-            break;
-        }
-        let (x, y) = *(span.at(i));
-        if span.len() - 1 != i {
-            print!("(x: {}, y: {}), ", x, y);
-        } else {
-            print!("(x: {}, y: {})", x, y);
-        }
-        i += 1;
-    };
-    println!(" ] }}")
-}

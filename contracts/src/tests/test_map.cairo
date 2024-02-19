@@ -323,25 +323,6 @@ fn test_get_neighbours_with_parent_diagonal_left_down_direction_in_border() {
     assert(contains_all(ref result, ref expected), 'wrong values');
 }
 
-// AUX
-fn print(ref span: Span<u64>) {
-    let mut i = 0;
-    print!("Span: {{ len: {}, values: [ ", span.len());
-    loop {
-        if span.len() == i {
-            break;
-        }
-        let v = *(span.at(i));
-        if !span.is_empty() {
-            print!("(v: {}),", v);
-        } else {
-            print!("(v: {})", v);
-        }
-        i += 1;
-    };
-    println!(" ] }}")
-}
-
 fn contains_all(ref s1: Span<u64>, ref s2: Span<u64>) -> bool {
     if s1.len() != s2.len() {
         return false;

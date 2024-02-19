@@ -1,4 +1,4 @@
-use core::nullable::{Nullable, FromNullableResult};
+use core::nullable::{Nullable, FromNullableResult, match_nullable};
 use pathfinding::algorithms::jps::{InfoKey, TilesInfo, TilesInfoTrait};
 use pathfinding::data_structures::tile::Tile;
 use pathfinding::numbers::i64::i64;
@@ -42,69 +42,72 @@ impl MapImpl of MapTrait {
         let mut relevant_neighbours = array![];
         let parent_grid_id = tiles_info.read(grid_id, InfoKey::PARENT);
 
-        if !parent_grid_id.is_null() {
-            let (px, py) = convert_idx_to_position(*self.width, parent_grid_id.deref());
-            let (x, y) = convert_idx_to_position(*self.width, grid_id);
-            let (dx, dy) = get_movement_direction_coords(x, y, px, py);
+        match match_nullable(parent_grid_id) {
+            FromNullableResult::Null => {
+                let (x, y) = convert_idx_to_position(*self.width, grid_id);
+                return _get_neighbours(self, 1, 1);
+            },
+            FromNullableResult::NotNull(val) => {
+                let (px, py) = convert_idx_to_position(*self.width, parent_grid_id.deref());
+                let (x, y) = convert_idx_to_position(*self.width, grid_id);
+                let (dx, dy) = get_movement_direction_coords(x, y, px, py);
 
-            let ix = IntegerTrait::<i64>::new(x, false);
-            let iy = IntegerTrait::<i64>::new(y, false);
-            let one = IntegerTrait::<i64>::new(1, false);
+                let ix = IntegerTrait::<i64>::new(x, false);
+                let iy = IntegerTrait::<i64>::new(y, false);
+                let one = IntegerTrait::<i64>::new(1, false);
 
-            if dx.is_non_zero() && dy.is_non_zero() {
-                if self.is_walkable_at(ix, iy + dy) {
-                    relevant_neighbours
-                        .append(convert_position_to_idx(*self.width, x, (iy + dy).mag));
-                }
-                if self.is_walkable_at(ix + dx, iy) {
-                    relevant_neighbours
-                        .append(convert_position_to_idx(*self.width, (ix + dx).mag, y));
-                }
-                if self.is_walkable_at(ix, iy + dy) || self.is_walkable_at(ix + dx, iy) {
-                    relevant_neighbours
-                        .append(convert_position_to_idx(*self.width, (ix + dx).mag, (iy + dy).mag));
-                }
-                if !self.is_walkable_at(ix - dx, iy) && self.is_walkable_at(ix, iy + dy) {
-                    relevant_neighbours
-                        .append(convert_position_to_idx(*self.width, (ix - dx).mag, (iy + dy).mag));
-                }
-                if !self.is_walkable_at(ix, iy - dy) && self.is_walkable_at(ix + dx, iy) {
-                    relevant_neighbours
-                        .append(convert_position_to_idx(*self.width, (ix + dx).mag, (iy - dy).mag));
-                }
-            } else {
-                if dx.is_zero() {
+                if dx.is_non_zero() && dy.is_non_zero() {
                     if self.is_walkable_at(ix, iy + dy) {
                         relevant_neighbours
                             .append(convert_position_to_idx(*self.width, x, (iy + dy).mag));
-                        if !self.is_walkable_at(ix + one, iy) {
-                            relevant_neighbours
-                                .append(convert_position_to_idx(*self.width, x + 1, (iy + dy).mag));
-                        }
-                        if x != 0 && !self.is_walkable_at(ix - one, iy) {
-                            relevant_neighbours
-                                .append(convert_position_to_idx(*self.width, x - 1, (iy + dy).mag));
-                        }
                     }
-                } else {
                     if self.is_walkable_at(ix + dx, iy) {
                         relevant_neighbours
                             .append(convert_position_to_idx(*self.width, (ix + dx).mag, y));
-                        if !self.is_walkable_at(ix, iy + one) {
+                    }
+                    if self.is_walkable_at(ix, iy + dy) || self.is_walkable_at(ix + dx, iy) {
+                        relevant_neighbours
+                            .append(convert_position_to_idx(*self.width, (ix + dx).mag, (iy + dy).mag));
+                    }
+                    if !self.is_walkable_at(ix - dx, iy) && self.is_walkable_at(ix, iy + dy) {
+                        relevant_neighbours
+                            .append(convert_position_to_idx(*self.width, (ix - dx).mag, (iy + dy).mag));
+                    }
+                    if !self.is_walkable_at(ix, iy - dy) && self.is_walkable_at(ix + dx, iy) {
+                        relevant_neighbours
+                            .append(convert_position_to_idx(*self.width, (ix + dx).mag, (iy - dy).mag));
+                    }
+                } else {
+                    if dx.is_zero() {
+                        if self.is_walkable_at(ix, iy + dy) {
                             relevant_neighbours
-                                .append(convert_position_to_idx(*self.width, (ix + dx).mag, y + 1));
+                                .append(convert_position_to_idx(*self.width, x, (iy + dy).mag));
+                            if !self.is_walkable_at(ix + one, iy) {
+                                relevant_neighbours
+                                    .append(convert_position_to_idx(*self.width, x + 1, (iy + dy).mag));
+                            }
+                            if x != 0 && !self.is_walkable_at(ix - one, iy) {
+                                relevant_neighbours
+                                    .append(convert_position_to_idx(*self.width, x - 1, (iy + dy).mag));
+                            }
                         }
-                        if y != 0 && !self.is_walkable_at(ix, iy - one) {
+                    } else {
+                        if self.is_walkable_at(ix + dx, iy) {
                             relevant_neighbours
-                                .append(convert_position_to_idx(*self.width, (ix + dx).mag, y - 1));
+                                .append(convert_position_to_idx(*self.width, (ix + dx).mag, y));
+                            if !self.is_walkable_at(ix, iy + one) {
+                                relevant_neighbours
+                                    .append(convert_position_to_idx(*self.width, (ix + dx).mag, y + 1));
+                            }
+                            if y != 0 && !self.is_walkable_at(ix, iy - one) {
+                                relevant_neighbours
+                                    .append(convert_position_to_idx(*self.width, (ix + dx).mag, y - 1));
+                            }
                         }
                     }
                 }
-            }
-        } else {
-            let (x, y) = convert_idx_to_position(*self.width, grid_id);
-            return _get_neighbours(self, x, y);
-        }
+            },
+        };
         relevant_neighbours.span()
     }
 }
