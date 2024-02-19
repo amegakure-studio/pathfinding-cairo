@@ -1,22 +1,22 @@
 import { getNeighbors } from "./algoFunctions.jsx";
 
-const bfs = (grid, startCell) => {
+const jps = (grid, startCell) => {
   const cellsInOrder = [];
-  const unvisitedCells = [startCell]; // Will act as queue
+  const unvisitedCells = [startCell]; // Will act as a stack
 
   while (unvisitedCells.length) {
-    const currCell = unvisitedCells.shift();
+    const currCell = unvisitedCells.pop();
+    if (currCell.visited) continue;
     cellsInOrder.push(currCell);
     if (currCell.end) return cellsInOrder;
     currCell.visited = true;
     const neighbors = getNeighbors(grid, currCell);
     neighbors.forEach((neighbor) => {
       neighbor.prevCell = currCell;
-      neighbor.inList = true;
       unvisitedCells.push(neighbor);
     });
   }
   return cellsInOrder;
 };
 
-export default bfs;
+export default jps;

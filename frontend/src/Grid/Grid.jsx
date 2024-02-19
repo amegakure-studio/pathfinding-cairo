@@ -20,6 +20,7 @@ function Grid() {
     setShortestPathLength,
     setPathfindingAnimation,
     setShortestPathAnimation,
+    setSize
   } = useContext(GridContext);
 
   const [mousePressed, setMousePressed] = useState(false);
@@ -53,6 +54,7 @@ function Grid() {
     ) {
       updatePathfinding();
     }
+    setSize(10, 10)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dragCell]);
 

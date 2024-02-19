@@ -3,6 +3,7 @@ let NUM_COL = 32;
 
 export const createBlankGrid = (startPosition, endPosition) => {
   const blankGrid = [];
+  console.log("creating..")
   for (let row = 0; row < NUM_ROW; row++) {
     const currRow = [];
     for (let col = 0; col < NUM_COL; col++) {
@@ -26,6 +27,13 @@ const createCellData = (row, col, startPosition, endPosition) => {
     wall: false,
     prevCell: null,
   };
+};
+
+export const setSize = (width, height) => {
+  NUM_ROW = height
+  NUM_COL = width
+  createBlankGrid(start(), end())
+  console.log("SETSIZE!")
 };
 
 export const start = () => {

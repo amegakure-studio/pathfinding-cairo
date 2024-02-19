@@ -4,7 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Menu, MenuItem } from "@mui/material";
+import { Menu, MenuItem, Input } from "@mui/material";
 import "./navBar.scss";
 import {
   createBlankGrid,
@@ -125,6 +125,11 @@ const NavBar = () => {
           <div className="title">
             <h1>AMEGAKURE</h1>
             <h3>- Starknet 2D pathfinders</h3>
+          </div>
+          <div className="title">
+            <Input
+              placeholder="WIDTH">
+              </Input>
           </div>
           <div className="menu">
             <Button

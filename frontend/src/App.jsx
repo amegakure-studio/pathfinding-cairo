@@ -2,7 +2,7 @@ import React, { createContext, useState, useCallback} from "react";
 import Grid from "./Grid/Grid";
 import Info from "./Info&Stats/Info";
 import NavBar from "./NavBar/NavBar";
-import { createBlankGrid, start, end } from "./Grid/gridFunctions.jsx";
+import { createBlankGrid, start, end, setSize } from "./Grid/gridFunctions.jsx";
 import "./app.scss";
 
 export const GridContext = createContext();
@@ -39,6 +39,7 @@ const App = () => {
         setPathfindingLength,
         shortestPathLength,
         setShortestPathLength,
+        setSize
       }}
     >
       <div className="mainContainer">
