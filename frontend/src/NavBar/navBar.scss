@@ -1,0 +1,85 @@
+#navbar {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  height: 6.5vh;
+  margin: 0;
+  padding: 0;
+  font-size: 1.8vh;
+  background-color: black;
+  color: white;
+}
+.toolbar {
+  justify-content: space-between;
+  align-items: center;
+}
+.menu {
+  margin-right: 1vw;
+}
+.algoDescription {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  font-size: 1.5vh;
+  margin: 0;
+  padding: 0;
+  padding-top: 0;
+  h1,
+  h3 {
+    margin-right: 0.5vw;
+  }
+}
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  h1 {
+    font-weight: 800;
+    margin-right: 1vw;
+  }
+  h3 {
+    font-weight: 300;
+    font-style: italic;
+  }
+}
+#algo-dropdown, #maze-dropdown {
+  font-size: 75%;
+  color: white;
+  margin-right: 0.2vw;
+  transition: color 0.3s ease;
+  &:hover {
+    color: #C0C0C0;
+  }
+}
+#algo-dropdown {
+  border: 1px solid white
+}
+
+.MuiMenu-root .MuiMenuItem-root {
+  font-size: 100%;
+  color: black;
+
+  &:hover {
+    background-color: lightgrey;
+  }
+}
+#clearPathButton,
+#resetButton,
+#speed-dropdown {
+  font-size: 75%;
+  margin-right: 0.2vw;
+  transition: color 0.3s ease, opacity 0.3 ease;
+  &:hover {
+    color: #7DF9FF;
+    opacity: 0.8;
+  }
+}
+
+#resetButton:disabled,
+#clearPathButton:disabled,
+#maze-dropdown:disabled,
+#algo-dropdown:disabled,
+#speed-dropdown:disabled {
+  color: red;
+}

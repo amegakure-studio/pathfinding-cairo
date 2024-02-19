@@ -1,0 +1,7 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1px,1fr));
+  margin-left: 1vw;
+  margin-right: 1vw;
+  margin-top: -1.5vh;
+}
