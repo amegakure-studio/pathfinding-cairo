@@ -17,12 +17,12 @@ DECLARED_CLASSHASH=$(starkli declare --watch \
 
 echo -e "$GREEN\nDeclared Classhash: $DECLARED_CLASSHASH$RESET"
 
-# echo -e "$GREEN\n==> Deploy Pathfinder$RESET"
-# CONTRACT_ADDRESS=$(starkli deploy --watch \
-#     --account $ACCOUNT_SRC \
-#     --rpc $RPC_URL \
-#     --keystore $KEYSTORE_SRC \
-#     --keystore-password $KEYSTORE_PASSWORD \
-#     $DECLARED_CLASSHASH)
+echo -e "$GREEN\n==> Deploy Pathfinder$RESET"
+CONTRACT_ADDRESS=$(starkli deploy --watch \
+    --account $ACCOUNT_SRC \
+    --rpc $RPC_URL \
+    --keystore $KEYSTORE_SRC \
+    --keystore-password $KEYSTORE_PASSWORD \
+    $DECLARED_CLASSHASH)
 
-# echo -e "$GREEN$\nDeployed contract address: $CONTRACT_ADDRESS$RESET"
+echo -e "$GREEN$\nDeployed contract address: $CONTRACT_ADDRESS$RESET"
