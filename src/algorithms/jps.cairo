@@ -1,6 +1,6 @@
 use core::array::SpanTrait;
 use core::dict::Felt252DictTrait;
-use core::nullable::{Nullable, NullableTrait};
+use core::nullable::{Nullable, NullableTrait, match_nullable, FromNullableResult};
 use core::option::OptionTrait;
 use pathfinding::data_structures::{
     map::{Map, MapTrait, convert_position_to_idx, convert_idx_to_position},
@@ -175,7 +175,11 @@ fn identify_successors(
             let jump_point = opt_jump_point.unwrap();
             let (jx, jy) = convert_idx_to_position(map.width, jump_point);
             let jp_status = tiles_info.read(jump_point, InfoKey::STATUS);
-            if !jp_status.is_null() && jp_status.deref() == CLOSED {
+            let jp_status_is_null = match match_nullable(jp_status) {
+                FromNullableResult::Null => true,
+                FromNullableResult::NotNull(val) => false,
+            };
+            if !jp_status_is_null && jp_status.deref() == CLOSED {
                 i += 1;
                 continue;
             }
@@ -187,14 +191,22 @@ fn identify_successors(
             let ng = tiles_info.read(node_id, InfoKey::CUMULATIVE_PATH_DISTANCE).deref() + jd;
 
             let jp_g = tiles_info.read(jump_point, InfoKey::CUMULATIVE_PATH_DISTANCE);
-            if jp_status.is_null()
-                || (!jp_status.is_null() && jp_status.deref() != OPENED)
-                || jp_g.is_null()
-                || (!jp_g.is_null() && ng < jp_g.deref()) {
+            let jp_g_is_null = match match_nullable(jp_g) {
+                FromNullableResult::Null => true,
+                FromNullableResult::NotNull(val) => false,
+            };
+            if jp_status_is_null
+                || (!jp_status_is_null && jp_status.deref() != OPENED)
+                || jp_g_is_null
+                || (!jp_g_is_null && ng < jp_g.deref()) {
                 tiles_info.write(jump_point, InfoKey::CUMULATIVE_PATH_DISTANCE, ng);
 
                 let jp_h = tiles_info.read(jump_point, InfoKey::DISTANCE_TO_GOAL);
-                if jp_h.is_null() {
+                let jp_h_is_null = match match_nullable(jp_h) {
+                    FromNullableResult::Null => true,
+                    FromNullableResult::NotNull(val) => false,
+                };
+                if jp_h_is_null {
                     let jp_h_estimated = manhattan(
                         (IntegerTrait::<i64>::new(jx, false)
                             - IntegerTrait::<i64>::new(goal_x, false))
@@ -211,7 +223,7 @@ fn identify_successors(
                 tiles_info.write(jump_point, InfoKey::ESTIMATIVE_TOTAL_COST, jp_f);
                 tiles_info.write(jump_point, InfoKey::PARENT, node_id);
 
-                if jp_status.is_null() || (!jp_status.is_null() && jp_status.deref() != OPENED) {
+                if jp_status_is_null || (!jp_status_is_null && jp_status.deref() != OPENED) {
                     open_list.add(jump_point, jp_f);
                     tiles_info.write(jump_point, InfoKey::STATUS, OPENED);
                 }
@@ -288,7 +300,11 @@ fn build_reverse_path_from(map: Map, ref tiles_info: TilesInfo, grid_id: u64) ->
     let mut parent_id = grid_id;
     loop {
         let p = tiles_info.read(parent_id, InfoKey::PARENT);
-        if p.is_null() {
+        let p_is_null = match match_nullable(p) {
+            FromNullableResult::Null => true,
+            FromNullableResult::NotNull(val) => false,
+        };
+        if p_is_null {
             break;
         }
         res.append(p.deref());

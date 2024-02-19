@@ -23,7 +23,7 @@ mod Pathfinder {
     #[storage]
     struct Storage {}
 
-    #[abi(embed_v0)]
+    #[external(v0)]
     impl PathfinderImpl of IPathfinder<ContractState> {
         fn jps(
             self: @ContractState,
