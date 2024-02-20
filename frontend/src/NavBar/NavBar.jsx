@@ -60,7 +60,7 @@ const NavBar = () => {
     setShortestPathLength(0);
   };
 
-  const runAlgo = (algo) => {
+  const runAlgo = async(algo) => {
     setIsAnimating(true); //set to true to begin animation
     clearPath(
       grid,
@@ -73,7 +73,8 @@ const NavBar = () => {
     );
     const startCell = grid[startPosition[0]][startPosition[1]];
     const endCell = grid[endPosition[0]][endPosition[1]];
-    const allCellsInOrder = algos[algo](grid, startCell, endCell);
+    const allCellsInOrder = await algos[algo](grid, startCell, endCell);
+    console.log("allCellsInOrder: ", allCellsInOrder);
     if (algo === "Bidirectional Search") {
       const { path, finalPath } = allCellsInOrder;
       setPathfindingLength(path.length - 1);

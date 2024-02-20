@@ -1,5 +1,5 @@
-let NUM_ROW = 60;
-let NUM_COL = 32;
+let NUM_ROW = 5;
+let NUM_COL = 4;
 
 export const createBlankGrid = (startPosition, endPosition) => {
   const blankGrid = [];

@@ -1,0 +1,136 @@
+[
+    {
+      "type": "impl",
+      "name": "PathfinderImpl",
+      "interface_name": "pathfinding::pathfinder::IPathfinder"
+    },
+    {
+      "type": "enum",
+      "name": "core::bool",
+      "variants": [
+        {
+          "name": "False",
+          "type": "()"
+        },
+        {
+          "name": "True",
+          "type": "()"
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "pathfinding::data_structures::tile::Tile",
+      "members": [
+        {
+          "name": "id",
+          "type": "core::integer::u64"
+        },
+        {
+          "name": "x",
+          "type": "core::integer::u64"
+        },
+        {
+          "name": "y",
+          "type": "core::integer::u64"
+        },
+        {
+          "name": "is_walkable",
+          "type": "core::bool"
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "core::array::Span::<pathfinding::data_structures::tile::Tile>",
+      "members": [
+        {
+          "name": "snapshot",
+          "type": "@core::array::Array::<pathfinding::data_structures::tile::Tile>"
+        }
+      ]
+    },
+    {
+      "type": "struct",
+      "name": "core::array::Span::<(core::integer::u64, core::integer::u64)>",
+      "members": [
+        {
+          "name": "snapshot",
+          "type": "@core::array::Array::<(core::integer::u64, core::integer::u64)>"
+        }
+      ]
+    },
+    {
+      "type": "interface",
+      "name": "pathfinding::pathfinder::IPathfinder",
+      "items": [
+        {
+          "type": "function",
+          "name": "jps",
+          "inputs": [
+            {
+              "name": "tiles",
+              "type": "core::array::Span::<pathfinding::data_structures::tile::Tile>"
+            },
+            {
+              "name": "map_width",
+              "type": "core::integer::u64"
+            },
+            {
+              "name": "map_height",
+              "type": "core::integer::u64"
+            },
+            {
+              "name": "start",
+              "type": "(core::integer::u64, core::integer::u64)"
+            },
+            {
+              "name": "goal",
+              "type": "(core::integer::u64, core::integer::u64)"
+            }
+          ],
+          "outputs": [
+            {
+              "type": "core::array::Span::<(core::integer::u64, core::integer::u64)>"
+            }
+          ],
+          "state_mutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "vjps",
+          "inputs": [],
+          "outputs": [
+            {
+              "type": "core::array::Span::<(core::integer::u64, core::integer::u64)>"
+            }
+          ],
+          "state_mutability": "view"
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "name": "pathfinding::pathfinder::Pathfinder::Path",
+      "kind": "struct",
+      "members": [
+        {
+          "name": "path_len",
+          "type": "core::integer::u32",
+          "kind": "data"
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "name": "pathfinding::pathfinder::Pathfinder::Event",
+      "kind": "enum",
+      "variants": [
+        {
+          "name": "Path",
+          "type": "pathfinding::pathfinder::Pathfinder::Path",
+          "kind": "nested"
+        }
+      ]
+    }
+  ]
