@@ -323,5 +323,5 @@ fn build_reverse_path_from(map: Map, ref tiles_info: TilesInfo, grid_id: u64) ->
     reverse.span()
 }
 
-fn print_span(span: Span<u64>) {// let mut i = 0;s
+fn print_span(span: Span<u64>) { // let mut i = 0;s
 }
