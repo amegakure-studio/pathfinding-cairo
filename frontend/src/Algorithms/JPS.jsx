@@ -35,12 +35,12 @@ async function jps(grid, startCell, endCell) {
     try {
       path = await jpsContract.call("jps", myCallData);
     } catch(error) {
-      throw new Error('No more remaining steps');
+      throw new Error('Contract error: No remaining steps available.');
     }
 
     console.log("path", path);
     if (path.length == 0) {
-      throw new Error('Path not found');
+      throw new Error('Could not find a valid path on the provided map.');
     }
     
     const parsedJumpPoints = [];
