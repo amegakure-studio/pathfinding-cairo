@@ -22,8 +22,7 @@ export const descriptions = {
 };
 
 export const speeds = {
-  Slow: 10,
+  Slow: 100,
   Average: 5,
   Fast: 3,
-  Instant: 0,
 };

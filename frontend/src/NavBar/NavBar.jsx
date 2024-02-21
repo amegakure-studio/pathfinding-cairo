@@ -116,7 +116,7 @@ const NavBar = () => {
     const steps = mazes[maze](tempGrid, startCell, endCell);
     setDescription(maze);
     resetGridMaze();
-    animateMaze(steps, maze, setGrid, setIsAnimating, animationSpeed);
+    animateMaze(steps, maze, setGrid, setIsAnimating, animationSpeed / 20);
   };
 
   return (
