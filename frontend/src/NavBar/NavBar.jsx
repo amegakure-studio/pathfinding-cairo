@@ -253,8 +253,9 @@ const NavBar = () => {
         </Toolbar>
       </AppBar>
       <div className="algoDescription">
-        <h1>{description}</h1>
-        <h3>...{descriptions[description]}</h3>
+        {/* <h1>{description}</h1> */}
+        {/* <h3>...{descriptions[description]}</h3> */}
+        <h3></h3>
       </div>
     </div>
   );
