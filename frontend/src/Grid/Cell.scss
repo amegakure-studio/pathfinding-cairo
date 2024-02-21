@@ -11,6 +11,12 @@
   -ms-user-select: none;
   user-select: none;
 }
+.start {
+  background-color: #0facb2;
+}
+.end {
+  background-color: #d84e2f;
+}
 .wall {
   animation-name: wallAnimation;
   animation-duration: 0.2s;
@@ -98,12 +104,4 @@
     transform: scale(1);
     background-color: #ffd700;
   }
-}
-.start {
-  background-color: #0facb2;
-
-}
-
-.goal {
-  background-color: #ff5252;
 }

@@ -54,8 +54,6 @@ function Grid() {
     ) {
       updatePathfinding();
     }
-    setSize(10, 10)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dragCell]);
 
   const handleMouseDown = (row, col) => {

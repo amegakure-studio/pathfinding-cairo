@@ -33,7 +33,7 @@ async function jps(grid, startCell, endCell) {
     });
     const path = await jpsContract.call("jps", myCallData);
     
-    const result = [];
+    const jumpPoints = [];
 
     path.forEach(obj => {
       const col = cairo.uint256(obj[0]);
@@ -44,9 +44,35 @@ async function jps(grid, startCell, endCell) {
           start: false,
           end: false
       };
-      result.push(cell);
+      jumpPoints.push(cell);
     });
-    return result;
+
+    // Completa el camino con los puntos intermedios
+    const completedPath = [];
+    for (let i = 0; i < jumpPoints.length - 1; i++) {
+        const currentCell = jumpPoints[i] ;
+        const nextCell = jumpPoints[i + 1];
+        
+        // Agrega el punto actual al camino completado
+        completedPath.push(currentCell);
+        
+        // Calcula los puntos intermedios en línea recta entre las celdas actual y siguiente
+        const deltaX = nextCell.col - currentCell.col;
+        const deltaY = nextCell.row - currentCell.row;
+        const distance = Math.max(Math.abs(deltaX), Math.abs(deltaY));
+        
+        for (let j = 1; j < distance; j++) {
+          const col = parseInt(currentCell.col, 10);
+          const row = parseInt(currentCell.row, 10);
+          
+            const x = Math.floor(col + deltaX * (j / distance)).toString();
+            const y = Math.floor(row + deltaY * (j / distance)).toString();
+            completedPath.push({ col: x, row: y, start: false, end: false });
+        }
+    }
+    // Agrega la celda final al camino compSletado
+    completedPath.push(path[path.length - 1]);
+    return completedPath;
 }
 
 export default jps;

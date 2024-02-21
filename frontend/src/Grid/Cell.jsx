@@ -14,12 +14,6 @@ function Cell (props) {
   const cellType = start ? "start" : end ? "end" : wall ? "wall" : "";
   const cellClass = `cell ${cellType} ${inPathfinding ? "pathfinding" : ""} ${ inShortestPath ? "shortestPath" : "" }`;
   const content = start ? "S" : end ? "G" : ""
-
-  if (cellClass == "cell start  ") {
-    const cellClass = "start";
-  } else if (cellClass == "cell end  ") {
-    const cellClass = "goal";
-  } 
   
   return (
     <div

@@ -18,7 +18,7 @@ export const mazes = {
 };
 
 export const descriptions = {
-  "Dijkstra's Algorithm": "is weighted and guarantees the shortest path!",
+  "Jump Point Search": "An optimization to the A* search algorithm for uniform-cost grids.",
 };
 
 export const speeds = {
