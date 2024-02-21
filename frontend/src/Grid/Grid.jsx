@@ -136,6 +136,7 @@ function Grid() {
     const startCell = grid[startPosition[0]][startPosition[1]];
     const endCell = grid[endPosition[0]][endPosition[1]];
     const allCellsInOrder = algos[algoToRun](newGrid, startCell, endCell);
+    
     if (algoToRun === "Bidirectional Search") {
       const { path, finalPath } = allCellsInOrder;
       if(!path) return;

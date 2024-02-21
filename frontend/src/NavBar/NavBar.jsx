@@ -130,7 +130,7 @@ const NavBar = () => {
           <div className="title">
             <Input
               placeholder="WIDTH">
-              </Input>
+            </Input>
           </div>
           <div className="menu">
             <Button
