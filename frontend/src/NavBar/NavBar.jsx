@@ -131,7 +131,7 @@ const NavBar = () => {
         <Toolbar className="toolbar">
           <div className="title">
             <h1>AMEGAKURE</h1>
-            <h3>Pathfinder visualizer</h3>
+            <h3>Pathfinder Visualizer</h3>
           </div>
           {/* <div className="map-dim">
             COLUMNS: 
@@ -169,6 +169,7 @@ const NavBar = () => {
               {Object.entries(algos).map(([name]) => (
                 <MenuItem
                   key={name}
+                  style={{ fontSize: '0.8vw'}}
                   onClick={() => {
                     runAlgo(name);
                     algoDropDown.handleClose();
@@ -194,6 +195,7 @@ const NavBar = () => {
               {Object.entries(mazes).map(([name]) => (
                 <MenuItem
                   key={name}
+                  style={{ fontSize: '0.8vw'}}
                   onClick={() => {
                     runMaze(name);
                     mazeDropDown.handleClose();
@@ -219,6 +221,7 @@ const NavBar = () => {
               {Object.entries(speeds).map(([speed]) => (
                 <MenuItem
                   key={speed}
+                  style={{ fontSize: '0.8vw'}}
                   onClick={() => {
                     setAnimationSpeed(speeds[speed]);
                     setSpeedLabel(speed);
