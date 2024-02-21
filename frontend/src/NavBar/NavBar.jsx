@@ -15,6 +15,7 @@ import {
 import { getShortestPath, animateAlgo } from "../Algorithms/algoFunctions.jsx";
 import { algos, descriptions, mazes, speeds } from "../utils.jsx";
 import { animateMaze } from "../Mazes/mazeFunctions.jsx";
+import CenteredSnackbar from '../CenteredSnackbar.jsx';
 
 const NavBar = () => {
   const {
@@ -36,6 +37,19 @@ const NavBar = () => {
 
   const [animationSpeed, setAnimationSpeed] = useState(5);
   const [speedLabel, setSpeedLabel] = useState("Average");
+
+  // alert
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleOpenSnackbar = (msg) => {
+    setMessage(msg);
+    setOpen(true);
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpen(false);
+  };
 
   const algoDropDown = DropDown(); //drop-downs for algos and mazes and speeds
   const mazeDropDown = DropDown();
@@ -110,7 +124,8 @@ const NavBar = () => {
       );
     } catch(error) {
       setIsAnimating(false);
-      alert(error);
+      handleOpenSnackbar(error.message);
+      // alert(error);
     }
   };
 
@@ -127,6 +142,7 @@ const NavBar = () => {
 
   return (
     <div>
+      <CenteredSnackbar open={open} message={message} onClose={handleCloseSnackbar} />
       <AppBar position="static" id="navbar">
         <Toolbar className="toolbar">
           <div className="title">
