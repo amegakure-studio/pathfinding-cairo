@@ -73,39 +73,45 @@ const NavBar = () => {
     );
     const startCell = grid[startPosition[0]][startPosition[1]];
     const endCell = grid[endPosition[0]][endPosition[1]];
-    const allCellsInOrder = await algos[algo](grid, startCell, endCell);
-    console.log("allCellsInOrder: ", allCellsInOrder);
-    if (algo === "Bidirectional Search") {
-      const { path, finalPath } = allCellsInOrder;
-      setPathfindingLength(path.length - 1);
-      setShortestPathLength(finalPath.length - 1);
-      setDescription(algo);
+    
+    try {
+      const allCellsInOrder = await algos[algo](grid, startCell, endCell);
+      console.log("allCellsInOrder: ", allCellsInOrder);
+      if (algo === "Bidirectional Search") {
+        const { path, finalPath } = allCellsInOrder;
+        setPathfindingLength(path.length - 1);
+        setShortestPathLength(finalPath.length - 1);
+        setDescription(algo);
+        animateAlgo(
+          path,
+          finalPath,
+          setPathfindingAnimation,
+          setShortestPathAnimation,
+          setIsAnimating,
+          animationSpeed
+        );
+        return;
+      }
+      const shortestPath = getShortestPath(
+        allCellsInOrder[allCellsInOrder.length - 1]
+      );
+      //Set distance traveled for path
+      setPathfindingLength(allCellsInOrder.length - 1);
+      setShortestPathLength(shortestPath.length - 1);
+      // setDescription(algo);
+
       animateAlgo(
-        path,
-        finalPath,
+        allCellsInOrder,
+        shortestPath,
         setPathfindingAnimation,
         setShortestPathAnimation,
         setIsAnimating,
         animationSpeed
       );
-      return;
+    } catch(error) {
+      setIsAnimating(false);
+      alert(error);
     }
-    const shortestPath = getShortestPath(
-      allCellsInOrder[allCellsInOrder.length - 1]
-    );
-    //Set distance traveled for path
-    setPathfindingLength(allCellsInOrder.length - 1);
-    setShortestPathLength(shortestPath.length - 1);
-    // setDescription(algo);
-
-    animateAlgo(
-      allCellsInOrder,
-      shortestPath,
-      setPathfindingAnimation,
-      setShortestPathAnimation,
-      setIsAnimating,
-      animationSpeed
-    );
   };
 
   const runMaze = (maze) => {
