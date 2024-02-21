@@ -9,10 +9,9 @@ starknet = "2.4.0"
 snforge_std = { git = "https://github.com/foundry-rs/starknet-foundry", tag = "v0.14.0" }
 openzeppelin = { git = "https://github.com/OpenZeppelin/cairo-contracts.git", tag = "v0.8.0" }
 
-[lib]
-
 [[target.starknet-contract]]
 casm = true
+allowed-libfuncs-list.name = "experimental"
 
 [tool.fmt]
 sort-module-level-items = true

@@ -163,6 +163,7 @@ fn identify_successors(
     goal_y: u64
 ) {
     let neighbours = map.get_neighbours(ref tiles_info, node_id);
+    print_span(neighbours);
     let mut i = 0;
     loop {
         if neighbours.len() == i {
@@ -285,7 +286,6 @@ fn jump(
             }
         }
     }
-
     if map.is_walkable_at(ix + dx, iy) || map.is_walkable_at(ix, iy + dy) {
         return jump(map, (ix + dx).mag, (iy + dy).mag, x, y, goal_x, goal_y);
     } else {
@@ -323,19 +323,5 @@ fn build_reverse_path_from(map: Map, ref tiles_info: TilesInfo, grid_id: u64) ->
     reverse.span()
 }
 
-fn print_span(span: Span<u64>) {
-    let mut i = 0;
-    print!("Span: {{ values: [ ");
-    loop {
-        if span.len() == i {
-            break;
-        }
-        if span.len() - 1 != i {
-            print!("{}, ", *(span.at(i)));
-        } else {
-            print!("{}", *(span.at(i)));
-        }
-        i += 1;
-    };
-    println!(" ] }}")
+fn print_span(span: Span<u64>) {// let mut i = 0;s
 }

@@ -45,7 +45,7 @@ impl MapImpl of MapTrait {
         match match_nullable(parent_grid_id) {
             FromNullableResult::Null => {
                 let (x, y) = convert_idx_to_position(*self.width, grid_id);
-                return _get_neighbours(self, 1, 1);
+                return _get_neighbours(self, x, y);
             },
             FromNullableResult::NotNull(val) => {
                 let (px, py) = convert_idx_to_position(*self.width, parent_grid_id.deref());
@@ -67,15 +67,21 @@ impl MapImpl of MapTrait {
                     }
                     if self.is_walkable_at(ix, iy + dy) || self.is_walkable_at(ix + dx, iy) {
                         relevant_neighbours
-                            .append(convert_position_to_idx(*self.width, (ix + dx).mag, (iy + dy).mag));
+                            .append(
+                                convert_position_to_idx(*self.width, (ix + dx).mag, (iy + dy).mag)
+                            );
                     }
                     if !self.is_walkable_at(ix - dx, iy) && self.is_walkable_at(ix, iy + dy) {
                         relevant_neighbours
-                            .append(convert_position_to_idx(*self.width, (ix - dx).mag, (iy + dy).mag));
+                            .append(
+                                convert_position_to_idx(*self.width, (ix - dx).mag, (iy + dy).mag)
+                            );
                     }
                     if !self.is_walkable_at(ix, iy - dy) && self.is_walkable_at(ix + dx, iy) {
                         relevant_neighbours
-                            .append(convert_position_to_idx(*self.width, (ix + dx).mag, (iy - dy).mag));
+                            .append(
+                                convert_position_to_idx(*self.width, (ix + dx).mag, (iy - dy).mag)
+                            );
                     }
                 } else {
                     if dx.is_zero() {
@@ -84,11 +90,15 @@ impl MapImpl of MapTrait {
                                 .append(convert_position_to_idx(*self.width, x, (iy + dy).mag));
                             if !self.is_walkable_at(ix + one, iy) {
                                 relevant_neighbours
-                                    .append(convert_position_to_idx(*self.width, x + 1, (iy + dy).mag));
+                                    .append(
+                                        convert_position_to_idx(*self.width, x + 1, (iy + dy).mag)
+                                    );
                             }
                             if x != 0 && !self.is_walkable_at(ix - one, iy) {
                                 relevant_neighbours
-                                    .append(convert_position_to_idx(*self.width, x - 1, (iy + dy).mag));
+                                    .append(
+                                        convert_position_to_idx(*self.width, x - 1, (iy + dy).mag)
+                                    );
                             }
                         }
                     } else {
@@ -97,11 +107,15 @@ impl MapImpl of MapTrait {
                                 .append(convert_position_to_idx(*self.width, (ix + dx).mag, y));
                             if !self.is_walkable_at(ix, iy + one) {
                                 relevant_neighbours
-                                    .append(convert_position_to_idx(*self.width, (ix + dx).mag, y + 1));
+                                    .append(
+                                        convert_position_to_idx(*self.width, (ix + dx).mag, y + 1)
+                                    );
                             }
                             if y != 0 && !self.is_walkable_at(ix, iy - one) {
                                 relevant_neighbours
-                                    .append(convert_position_to_idx(*self.width, (ix + dx).mag, y - 1));
+                                    .append(
+                                        convert_position_to_idx(*self.width, (ix + dx).mag, y - 1)
+                                    );
                             }
                         }
                     }

@@ -8,6 +8,7 @@ mod data_structures {
     mod map;
     mod min_heap;
     mod tile;
+    mod tiles_info;
 }
 
 mod numbers {
