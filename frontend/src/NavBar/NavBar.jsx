@@ -140,7 +140,7 @@ const NavBar = () => {
               onClick={algoDropDown.handleClick}
               endIcon={<KeyboardArrowDownIcon aria-haspopup="true" />}
             >
-              Visualize
+              Run with
             </Button>
             <Menu
               anchorEl={algoDropDown.anchorEl}

@@ -12,10 +12,10 @@
   user-select: none;
 }
 .start {
-  background-color: #0facb2;
+  background-color: #00ccf2;
 }
 .end {
-  background-color: #d84e2f;
+  background-color: #ff5d7d;
 }
 .wall {
   animation-name: wallAnimation;
@@ -24,7 +24,7 @@
   animation-play-state: running;
   animation-timing-function: ease-out;
   animation-iteration-count: 1;
-  background-color: #2c2c2c;
+  background-color: #545454;
 }
 @keyframes wallAnimation {
   0% {
