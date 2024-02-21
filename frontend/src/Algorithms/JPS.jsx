@@ -18,11 +18,10 @@ async function jps(grid, startCell, endCell) {
 
     const provider = new RpcProvider({ nodeUrl: "https://starknet-testnet.public.blastapi.io" }); // only for starknet-devnet-rs
 
-    const response = await fetch("./src/ABI/abi_jps.json");
-    const ABIjps = await response.json();
+    const JPSClassAt = await provider.getClassAt("0x039fa849bd88d0a87b0df6b65ae8fbf423f20fed5eae6cabbd326216dd2b070b");
 
-    const jpsContract = new Contract(ABIjps, "0x039fa849bd88d0a87b0df6b65ae8fbf423f20fed5eae6cabbd326216dd2b070b", provider);
-    const callData = new CallData(ABIjps);
+    const jpsContract = new Contract(JPSClassAt.abi, "0x039fa849bd88d0a87b0df6b65ae8fbf423f20fed5eae6cabbd326216dd2b070b", provider);
+    const callData = new CallData(JPSClassAt.abi);
 
     const myCallData = callData.compile("jps", {
         tiles: tiles,
