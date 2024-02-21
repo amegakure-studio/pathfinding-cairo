@@ -13,8 +13,14 @@ function Cell (props) {
   const inShortestPath = shortestPathAnimation.has(`cell-${row}-${col}`); // if in shortest path animation
   const cellType = start ? "start" : end ? "end" : wall ? "wall" : "";
   const cellClass = `cell ${cellType} ${inPathfinding ? "pathfinding" : ""} ${ inShortestPath ? "shortestPath" : "" }`;
-  const content = start ? "🛸" : end ? "🪐" : ""
+  const content = start ? "S" : end ? "G" : ""
 
+  if (cellClass == "cell start  ") {
+    const cellClass = "start";
+  } else if (cellClass == "cell end  ") {
+    const cellClass = "goal";
+  } 
+  
   return (
     <div
       id={`cell-${row}-${col}`}
@@ -22,7 +28,7 @@ function Cell (props) {
       onMouseDown={() => onMouseDown(row, col)}
       onMouseOver={() => onMouseOver(row, col)}
       onMouseUp={onMouseUp}
-      style={{ fontSize: '1.2vw' }}
+      style={{ fontSize: '2vw', color: 'white' }}
     >{content}</div>
   );
 };

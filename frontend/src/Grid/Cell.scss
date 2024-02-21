@@ -45,28 +45,28 @@
   animation-play-state: running;
   animation-timing-function: ease-out;
   animation-iteration-count: 1;
-  background-color: #d3d3d3;
+  background-color: #7a25ce;
 }
 @keyframes pathfindingAnimation {
   0% {
     transform: scale(0.25);
-    background-color: #32c5c5
+    background-color: #ddbbff;
   }
   25% {
     transform: scale(0.45);
-    background-color: #32c5c5
+    background-color: #a87ad6;
   }
   50% {
     transform: scale(0.65);
-    background-color: #008080;
+    background-color: #9553d6;
   }
   75% {
     transform: scale(0.85);
-    background-color: #32c5c5
+    background-color: #823cc9;
   }
   100% {
     transform: scale(1);
-    background-color: #d3d3d3;
+    background-color: #7a25ce;
   }
 }
 .shortestPath {
@@ -98,4 +98,12 @@
     transform: scale(1);
     background-color: #ffd700;
   }
+}
+.start {
+  background-color: #0facb2;
+
+}
+
+.goal {
+  background-color: #ff5252;
 }
