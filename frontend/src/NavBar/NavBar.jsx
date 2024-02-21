@@ -125,13 +125,26 @@ const NavBar = () => {
         <Toolbar className="toolbar">
           <div className="title">
             <h1>AMEGAKURE</h1>
-            <h3>- Starknet 2D pathfinders</h3>
+            <h3>Pathfinder visualizer</h3>
           </div>
-          <div className="title">
+          {/* <div className="map-dim">
+            COLUMNS: 
             <Input
-              placeholder="WIDTH">
+              disabled={isAnimating} 
+              defaultValue={'20'}
+              id="input-wd"
+              placeholder=" WIDTH"
+              >
             </Input>
-          </div>
+            ROWS: 
+            <Input
+              disabled={isAnimating}
+              defaultValue={'30'}
+              id="input-wd"
+              placeholder=" HEIGHT"
+              >
+            </Input>
+          </div> */}
           <div className="menu">
             <Button
               className="button"

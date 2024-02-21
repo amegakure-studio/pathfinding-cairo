@@ -7,11 +7,10 @@ const Info = () => {
   const { pathfindingLength, shortestPathLength } = useContext(GridContext);
 
   const legendItems = [
-    { label: "Start", icon: "🛸" },
-    { label: "Target", icon: "🪐" },
-    { label: "Wall", color: "#36454f" },
-    { label: "Visited", color: "#d3d3d3" },
-    { label: "Shortest-Path", color: "#ffd700" },
+    { label: "Start", icon: "S", color: "#00ccf2" },
+    { label: "Goal", icon: "G", color: "#ff5d7d" },
+    { label: "Wall", color: "#545454" },
+    { label: "Path", color: "#6577ff" },
   ];
 
   return (
@@ -21,7 +20,7 @@ const Info = () => {
           return (
             <div key={index} className="item">
               <span className="icon">
-                {item.icon ? item.icon : <div className="box" style={{ backgroundColor: item.color }}></div>}
+                {<div className="box" style={{ paddingLeft: '0.7vw', fontSize: '1.5vw' ,backgroundColor: item.color }}>{item.icon}</div>}
               </span>
               <span className="label">{item.label}</span>
             </div>
@@ -29,8 +28,7 @@ const Info = () => {
         })}
       </div>
       <div className="stats">
-        <span>Visited Cells: {pathfindingLength}</span>
-        <span>Path Length: {shortestPathLength}</span>
+        <span>Path Length: {pathfindingLength ? (pathfindingLength + 1) : "-"}</span>
       </div>
     </div>
   );
