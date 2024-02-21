@@ -28,7 +28,7 @@ const Info = () => {
         })}
       </div>
       <div className="stats">
-        {/* <span>Path Length: {pathfindingLength ? (pathfindingLength + 1) : "-"}</span> */}
+        <span>Path Length: {pathfindingLength ? (pathfindingLength + 1) : "-"}</span>
       </div>
     </div>
   );
