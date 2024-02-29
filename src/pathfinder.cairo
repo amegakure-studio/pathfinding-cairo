@@ -12,11 +12,20 @@ trait IPathfinder<TContractState> {
         start: (u64, u64),
         goal: (u64, u64)
     ) -> Span<(u64, u64)>;
+    fn a_star(
+        self: @TContractState,
+        tiles: Span<Tile>,
+        map_width: u64,
+        map_height: u64,
+        start: (u64, u64),
+        goal: (u64, u64)
+    ) -> Span<(u64, u64)>;
 }
 
 #[starknet::contract]
 mod Pathfinder {
     use pathfinding::algorithms::{jps::JPSTrait};
+    use pathfinding::algorithms::{a_star::AStarTrait};
     use pathfinding::data_structures::{map::{Map, MapTrait}, tile::{Tile, TileTrait}};
     use super::IPathfinder;
 
@@ -46,6 +55,18 @@ mod Pathfinder {
         ) -> Span<(u64, u64)> {
             let map = MapTrait::new(map_height, map_width, tiles);
             JPSTrait::find_path(map, start, goal)
+        }
+
+        fn a_star(
+            self: @ContractState,
+            tiles: Span<Tile>,
+            map_width: u64,
+            map_height: u64,
+            start: (u64, u64),
+            goal: (u64, u64)
+        ) -> Span<(u64, u64)> {
+            let map = MapTrait::new(map_height, map_width, tiles);
+            AStarTrait::find_path(map, start, goal)
         }
     }
 }

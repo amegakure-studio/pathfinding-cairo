@@ -2,6 +2,7 @@ mod pathfinder;
 
 mod algorithms {
     mod jps;
+    mod a_star;
 }
 
 mod data_structures {
@@ -26,5 +27,6 @@ mod utils {
 mod tests {
     // mod test_map;
     mod test_jps;
-// mod test_heap;
+    mod test_a_star;
+    // mod test_heap;
 }
