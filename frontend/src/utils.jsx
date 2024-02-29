@@ -1,4 +1,5 @@
 import jps from "./Algorithms/JPS.jsx";
+import a_star from "./Algorithms/AStar.jsx";
 import random from "./Mazes/Personal.jsx";
 import recursiveDivision from "./Mazes/RecursiveDivision.jsx";
 import recursiveBacktracking from "./Mazes/RecusiveBacktracking.jsx";
@@ -7,6 +8,7 @@ import binaryTree from "./Mazes/binaryTree.jsx";
 
 export const algos = {
   "Jump Point Search": jps,
+  "A*": a_star,
 };
 
 export const mazes = {
