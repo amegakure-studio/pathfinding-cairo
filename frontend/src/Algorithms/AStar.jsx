@@ -3,7 +3,7 @@ import { getNeighbors } from "./algoFunctions.jsx";
 
 import { RpcProvider, shortString, Contract, cairo, CallData } from "starknet";
 
-async function jps(grid, startCell, endCell) {
+async function a_star(grid, startCell, endCell) {
     
     const height = grid.length;
     const witdh = grid[0].length;
@@ -23,7 +23,7 @@ async function jps(grid, startCell, endCell) {
     const jpsContract = new Contract(JPSClassAt.abi, "0x07921148721b727726ff737f9c65e411c730ab7dd9667f323dd449067daa0c8f", provider);
     const callData = new CallData(JPSClassAt.abi);
 
-    const myCallData = callData.compile("jps", {
+    const myCallData = callData.compile("a_star", {
         tiles: tiles,
         map_width: witdh,
         map_height: height,
@@ -85,4 +85,4 @@ async function jps(grid, startCell, endCell) {
     return completedPath;
 }
 
-export default jps;
+export default a_star;

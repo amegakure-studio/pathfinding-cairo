@@ -1,4 +1,4 @@
-use pathfinding::algorithms::jps::{jump, JPSTrait};
+use pathfinding::algorithms::a_star::{AStarTrait};
 use pathfinding::data_structures::map::{
     Map, MapTrait, convert_position_to_idx, convert_idx_to_position
 };
@@ -15,7 +15,6 @@ fn deploy_contract(name: felt252) -> ContractAddress {
 const UNRECHEABLE: u64 = 999999;
 const X: felt252 = 'X';
 const O: felt252 = 'O';
-
 
 // Giving parent (P) and actual (G) 
 // When actual is the goal and call jump()
@@ -436,8 +435,10 @@ const O: felt252 = 'O';
 // 5 O X O O O X  
 // S: Start, G: Goal
 // Map width = 6, height = 6
-// #[test]
 // fn test_find_path_with_small_map() {
+// #[test]
+// #[available_gas(1000000000000000)]
+// fn test_a_star() {
 //     let map_tiles = array![O,O,O,O,X,O,
 //                            O,O,O,X,O,O,
 //                            O,O,O,X,X,O,
@@ -448,13 +449,13 @@ const O: felt252 = 'O';
 
 //     let map = build_map(6, 6, map_tiles);
 
-//     let start = (1, 1);
-//     let goal = (4, 1);
+//     let start = (0, 0);
+//     let goal = (5, 0);
 
-//     let mut result = JPSTrait::find_path(map, start: start, goal: goal);
-//     // println!("------------------");
-//     // print(map.width, result);
-//     assert(result.len() == 8, 'wrong jps');
+//     let mut result = AStarTrait::find_path(map, start: start, goal: goal);
+//     println!("------------------");
+//     print(map.width, result);
+//     // assert(result.len() == 8, 'wrong jps');
 // }
 
 //   0 1 2 3 4 5  
@@ -777,8 +778,8 @@ const O: felt252 = 'O';
 //     let goal = (29, 9);
 
 //     let mut result = JPSTrait::find_path(map, start: start, goal: goal);
-// // println!("------------------");
-// // print(30, result);
+//     println!("------------------");
+//     print(30, result);
 // }
 
 #[test]
@@ -2592,7 +2593,7 @@ fn test_find_path_with_big_map() {
     let start = (1, 2);
     let goal = (20, 55);
 
-    let mut result = JPSTrait::find_path(map, start: start, goal: goal);
+    let mut result = AStarTrait::find_path(map, start: start, goal: goal);
     print(map.width, result);
 }
 
@@ -2652,7 +2653,7 @@ fn build_map(width: u64, height: u64, tiles: Array<felt252>) -> Map {
 
 fn print(width: u64, span: Span<(u64, u64)>) {
     let mut i = 0;
-    print!("JPS PATH: {{ len: {}, values: [ ", span.len());
+    print!("ASTAR PATH: {{ len: {}, values: [ ", span.len());
     loop {
         if span.len() == i {
             break;

@@ -1,6 +1,7 @@
 mod pathfinder;
 
 mod algorithms {
+    mod a_star;
     mod jps;
 }
 
@@ -24,6 +25,7 @@ mod utils {
 
 #[cfg(test)]
 mod tests {
+    mod test_a_star;
     // mod test_map;
     mod test_jps;
 // mod test_heap;
