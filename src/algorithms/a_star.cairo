@@ -2,6 +2,7 @@ use core::array::SpanTrait;
 use core::dict::Felt252DictTrait;
 use core::nullable::{Nullable, NullableTrait, match_nullable, FromNullableResult};
 use core::option::OptionTrait;
+use pathfinding::algorithms::jps::{InfoKey, TilesInfo, TilesInfoTrait};
 use pathfinding::data_structures::{
     map::{Map, MapTrait, convert_position_to_idx, convert_idx_to_position},
     min_heap::{MinHeap, MinHeapTrait},
@@ -13,7 +14,6 @@ use pathfinding::utils::constants::{
 };
 use pathfinding::utils::heuristics::manhattan;
 use pathfinding::utils::movement::get_movement_direction_coords;
-use pathfinding::algorithms::jps::{InfoKey, TilesInfo, TilesInfoTrait};
 
 const OPENED: u64 = 1;
 const CLOSED: u64 = 2;
@@ -65,10 +65,11 @@ impl AStarDiagOneObstacle of AStarTrait {
                     FromNullableResult::Null => true,
                     FromNullableResult::NotNull(val) => false,
                 };
-                            
+
                 let inx = IntegerTrait::<i64>::new(nx, false);
                 let iny = IntegerTrait::<i64>::new(ny, false);
-                if (!n_status_is_null && n_status.deref() == CLOSED) || !map.is_walkable_at(inx, iny) {
+                if (!n_status_is_null && n_status.deref() == CLOSED)
+                    || !map.is_walkable_at(inx, iny) {
                     continue;
                 }
 
@@ -86,8 +87,8 @@ impl AStarDiagOneObstacle of AStarTrait {
                     FromNullableResult::Null => true,
                     FromNullableResult::NotNull(val) => false,
                 };
-                if (!nf_is_null && new_nf < nf.deref()) && (n_status_is_null || n_status.deref() == CLOSED) {
-
+                if (!nf_is_null && new_nf < nf.deref())
+                    && (n_status_is_null || n_status.deref() == CLOSED) {
                     tiles_info.write(n_id, InfoKey::ESTIMATIVE_TOTAL_COST, nf.deref());
                     tiles_info.write(n_id, InfoKey::PARENT, node_id);
 

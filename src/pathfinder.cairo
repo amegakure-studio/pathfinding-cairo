@@ -24,8 +24,8 @@ trait IPathfinder<TContractState> {
 
 #[starknet::contract]
 mod Pathfinder {
-    use pathfinding::algorithms::{jps::JPSTrait};
     use pathfinding::algorithms::{a_star::AStarTrait};
+    use pathfinding::algorithms::{jps::JPSTrait};
     use pathfinding::data_structures::{map::{Map, MapTrait}, tile::{Tile, TileTrait}};
     use super::IPathfinder;
 
