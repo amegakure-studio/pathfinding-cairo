@@ -1,5 +1,4 @@
 use pathfinding::algorithms::a_star::{AStarTrait};
-use pathfinding::algorithms::jps::{jump, JPSTrait};
 use pathfinding::data_structures::map::{
     Map, MapTrait, convert_position_to_idx, convert_idx_to_position
 };
@@ -2593,7 +2592,7 @@ fn test_a_star() {
     let start = (1, 2);
     let goal = (20, 55);
 
-    let mut result = JPSTrait::find_path(map, start: start, goal: goal);
+    let mut result = AStarTrait::find_path(map, start: start, goal: goal);
     // println!("len a_star: {}", result.len());
     print(map.width, result);
 }
