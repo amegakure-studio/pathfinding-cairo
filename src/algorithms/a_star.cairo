@@ -37,6 +37,7 @@ impl AStarDiagOneObstacle of AStarTrait {
 
         let mut goal_flag = false;
         let mut node_id_flag = 0;
+
         loop {
             if open_list.len == 0 || goal_flag {
                 break;
@@ -53,7 +54,7 @@ impl AStarDiagOneObstacle of AStarTrait {
             }
 
             let neighbours = map.get_neighbours(ref tiles_info, node_id);
-            let i = 0;
+            let mut i = 0;
             loop {
                 if neighbours.len() == i {
                     break;
@@ -70,6 +71,7 @@ impl AStarDiagOneObstacle of AStarTrait {
                 let iny = IntegerTrait::<i64>::new(ny, false);
                 if (!n_status_is_null && n_status.deref() == CLOSED)
                     || !map.is_walkable_at(inx, iny) {
+                    i += 1;
                     continue;
                 }
 
@@ -83,20 +85,22 @@ impl AStarDiagOneObstacle of AStarTrait {
                 );
                 let new_nf = nh + ng;
                 let nf = tiles_info.read(n_id, InfoKey::ESTIMATIVE_TOTAL_COST);
-                let nf_is_null = match match_nullable(nf) {
-                    FromNullableResult::Null => true,
-                    FromNullableResult::NotNull(val) => false,
+                let nf_int = match match_nullable(nf) {
+                    FromNullableResult::Null => 0,
+                    FromNullableResult::NotNull(val) => nf.deref(),
                 };
-                if (!nf_is_null && new_nf < nf.deref())
-                    && (n_status_is_null || n_status.deref() == CLOSED) {
-                    tiles_info.write(n_id, InfoKey::ESTIMATIVE_TOTAL_COST, nf.deref());
+                if new_nf < nf_int || (n_status_is_null || n_status.deref() == CLOSED) {
+                    
+                    tiles_info.write(n_id, InfoKey::ESTIMATIVE_TOTAL_COST, new_nf);
                     tiles_info.write(n_id, InfoKey::PARENT, node_id);
 
                     if n_status_is_null || n_status.deref() == CLOSED {
-                        open_list.add(n_id, nf.deref());
+
+                        open_list.add(n_id, new_nf);
                         tiles_info.write(n_id, InfoKey::STATUS, OPENED);
                     }
                 }
+                i += 1;
             }
         };
 

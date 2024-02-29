@@ -435,8 +435,10 @@ const O: felt252 = 'O';
 // 5 O X O O O X  
 // S: Start, G: Goal
 // Map width = 6, height = 6
-// #[test]
 // fn test_find_path_with_small_map() {
+// #[test]
+// #[available_gas(1000000000000000)]
+// fn test_a_star() {
 //     let map_tiles = array![O,O,O,O,X,O,
 //                            O,O,O,X,O,O,
 //                            O,O,O,X,X,O,
@@ -447,13 +449,13 @@ const O: felt252 = 'O';
 
 //     let map = build_map(6, 6, map_tiles);
 
-//     let start = (1, 1);
-//     let goal = (4, 1);
+//     let start = (0, 0);
+//     let goal = (5, 0);
 
-//     let mut result = JPSTrait::find_path(map, start: start, goal: goal);
-//     // println!("------------------");
-//     // print(map.width, result);
-//     assert(result.len() == 8, 'wrong jps');
+//     let mut result = AStarTrait::find_path(map, start: start, goal: goal);
+//     println!("------------------");
+//     print(map.width, result);
+//     // assert(result.len() == 8, 'wrong jps');
 // }
 
 //   0 1 2 3 4 5  
@@ -782,8 +784,7 @@ const O: felt252 = 'O';
 
 #[test]
 #[available_gas(1000000000000000)]
-// fn test_find_path_with_big_map() {
-fn test_a_star() {
+fn test_find_path_with_big_map() {
     let map_tiles = array![
         O,
         O,
@@ -2593,7 +2594,6 @@ fn test_a_star() {
     let goal = (20, 55);
 
     let mut result = AStarTrait::find_path(map, start: start, goal: goal);
-    // println!("len a_star: {}", result.len());
     print(map.width, result);
 }
 
