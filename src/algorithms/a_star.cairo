@@ -90,12 +90,10 @@ impl AStarDiagOneObstacle of AStarTrait {
                     FromNullableResult::NotNull(val) => nf.deref(),
                 };
                 if new_nf < nf_int || (n_status_is_null || n_status.deref() == CLOSED) {
-                    
                     tiles_info.write(n_id, InfoKey::ESTIMATIVE_TOTAL_COST, new_nf);
                     tiles_info.write(n_id, InfoKey::PARENT, node_id);
 
                     if n_status_is_null || n_status.deref() == CLOSED {
-
                         open_list.add(n_id, new_nf);
                         tiles_info.write(n_id, InfoKey::STATUS, OPENED);
                     }
